@@ -27,7 +27,7 @@
 
 
 # Structure of the Application
-## There are 3 Classes which are vital to the operatbility of the system.
+## There are 4 Classes which are vital to the operatbility of the system.
 
 ### SearchEngineGUI
 ##### This java class encapsulates all GUI components and elements within the class, and provides a clear and minimal interface for the user to interact with, 
