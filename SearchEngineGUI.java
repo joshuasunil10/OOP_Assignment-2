@@ -34,7 +34,7 @@ public class SearchEngineGUI extends JFrame {
     private JButton historyButton;
     private JButton clearHistoryButton;
     private JFileChooser directoryChooser;
-    private FileSearcher fileSearcher;
+    private SearchProcessor searchProcessor;
     private ArrayList<String> searchHistory;
     private File selectedDirectory;
     private JTextPane previewTextPane; // Preview panel for displaying file content
@@ -71,7 +71,7 @@ public class SearchEngineGUI extends JFrame {
         directoryChooser = new JFileChooser();
         
         // instance of the FileSearcher Class
-        fileSearcher = new FileSearcher();
+        searchProcessor = new SearchProcessor();
         
         // status label
         statusLabel = new JLabel();
@@ -227,9 +227,9 @@ public class SearchEngineGUI extends JFrame {
         }
         
         
-        // call the filesearcher to search
+        // call the searchProcessor to search
         resultListModel.clear();
-        fileSearcher.performSearch(selectedDirectory, searchTerm, resultListModel, statusLabel);
+        searchProcessor.performSearch(selectedDirectory, searchTerm, resultListModel, statusLabel);
         if (!searchHistory.contains(searchTerm)) {
             searchHistory.add(searchTerm);
         }
