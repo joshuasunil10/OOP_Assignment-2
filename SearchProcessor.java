@@ -11,7 +11,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class FileSearcher {
+public class SearchProcessor {
 
     public void performSearch(File selectedDirectory, String searchTerm, DefaultListModel<String> resultListModel, JLabel statusLabel) {
         statusLabel.setText("Searching...");
