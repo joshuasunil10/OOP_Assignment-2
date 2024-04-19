@@ -33,7 +33,7 @@
 ##### This java class encapsulates all GUI components and elements within the class, and provides a clear and minimal interface for the user to interact with, 
 #### It also incorporates abstraction by taking away the complexities of the GUI for the user, and only focus on the searching functionality which is handled by FileSearcher
 
-### FileSearcher
+### SearchProcessor
 ##### Also using encapsulation, the logic for searching through the files is located here, this keeps the searching function separate to the GUI, The 
 
 ### FileMatch 
