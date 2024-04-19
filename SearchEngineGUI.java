@@ -103,7 +103,7 @@ public class SearchEngineGUI extends JFrame {
         topPanel.add(selectedDirectoryLabel, BorderLayout.SOUTH);
 
         JScrollPane scrollPane = new JScrollPane(resultList);
-        scrollPane.setBackground(new Color(46, 47, 52)); // Darker gray background
+        scrollPane.setBackground(new Color(46, 47, 52)); // Darker gray backgrou
 
         JPanel bottomPanel = new JPanel(new FlowLayout());
         bottomPanel.add(aboutButton);
@@ -165,21 +165,35 @@ public class SearchEngineGUI extends JFrame {
     }
 
     private void displayFileContent(String selectedItem) {
-    	
-    
-        
         String fileName = selectedItem.split(" - Match Count: ")[0];
         File fileToOpen = new File(selectedDirectory, fileName);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileToOpen))) {
             StringBuilder fileContent = new StringBuilder();
-      
-            
+
             String line;
             while ((line = reader.readLine()) != null) {
-                fileContent.append(line).append("\n"); // Append each line to the StringBuilder
+                // Split the line by spaces to find individual words
+                String[] words = line.split("\\s+");
+                StringBuilder formattedLine = new StringBuilder();
+
+                for (String word : words) {
+                    // Check if the word matches the search term
+                    if (word.toLowerCase().contains(searchField.getText().trim().toLowerCase())) {
+                        // If the word matches, wrap it with <b> tags for bold styling
+                        formattedLine.append("<b>").append(word).append("</b>").append(" ");
+                    } else {
+                        formattedLine.append(word).append(" ");
+                    }
+                }
+
+                // Append the formatted line with HTML paragraph tags
+                fileContent.append("<p>").append(formattedLine.toString().trim()).append("</p>");
             }
-            previewTextPane.setText(fileContent.toString()); // Set the content of the JTextPane
+
+            // Set the HTML content to the JTextPane
+            previewTextPane.setContentType("text/html");
+            previewTextPane.setText("<html><body>" + fileContent.toString() + "</body></html>");
             previewTextPane.setCaretPosition(0); // Set caret position to the start
         } catch (IOException e) {
             JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
